@@ -10,6 +10,10 @@ _In development — bullets added per PR; finalized at release._
 
 - **feat(providers):** update volcengine-ark model list, adding DeepSeek-V4-Flash and DeepSeek-V4-Pro. (thanks @kenlin8827)
 
+### 🔧 Bug Fixes
+
+- **fix(api): evict stale in-memory rate-limit windows to stop slow heap leak** — the `FALLBACK_MEMORY_STORE` (used when `REDIS_URL` is unset — the common self-hosted case) accumulated expired window keys and never deleted them, causing ~500 MB → OOM over ~2 days idle (#4771). Fixed by adding `evictStaleRateLimitWindows()` and calling it opportunistically inside `checkInMemoryRateLimit` once the store exceeds a size threshold. Closes #4041.
+
 ---
 
 ## [3.8.35] — 2026-06-23
