@@ -10,6 +10,10 @@ _In development — bullets added per PR; finalized at release._
 
 - **feat(providers):** update volcengine-ark model list, adding DeepSeek-V4-Flash and DeepSeek-V4-Pro. (thanks @kenlin8827)
 
+### 🔧 Bug Fixes
+
+- **translator**: preserve intentional empty-string and empty-array tool argument values in streaming openai-to-claude translation; the regex-based strip from #1852 incorrectly deleted fields like `{"file_path":"","content":"text"}` → `{"content":"text"}`, silently corrupting tool inputs for providers (e.g. deepseek-v4-flash-free) that emit full args in a single chunk ([#4951](https://github.com/diegosouzapw/OmniRoute/issues/4951)).
+
 ---
 
 ## [3.8.35] — 2026-06-23
