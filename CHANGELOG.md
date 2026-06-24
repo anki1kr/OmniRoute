@@ -10,6 +10,10 @@ _In development — bullets added per PR; finalized at release._
 
 - **feat(providers):** update volcengine-ark model list, adding DeepSeek-V4-Flash and DeepSeek-V4-Pro. (thanks @kenlin8827)
 
+### 🔧 Bug Fixes
+
+- **api/responses**: parse the `/v1/responses` request body at most once per request instead of 3-4× on the hot Codex `wire_api=responses` path — `withInjectionGuard` now threads the already-parsed body to the wrapped handler as a third argument, `withCodexPreferredModel` reuses it for model detection, and `handleChat` receives it via `resolveChatRequestBody` (mirrors the existing #4380 pattern). Same fix applied to `/v1/messages` ([#4041](https://github.com/diegosouzapw/OmniRoute/issues/4041)).
+
 ---
 
 ## [3.8.35] — 2026-06-23
